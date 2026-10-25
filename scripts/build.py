@@ -206,23 +206,35 @@ def generate_static_case_cards(cases, limit=24):
 
 def build():
     base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-    data_dir = os.path.join(base_dir, 'data')
-    os.makedirs(data_dir, exist_ok=True)
+    dist_dir = os.path.join(base_dir, 'dist')
     
-    # 1. Convert CSV to JSON
+    # 1. Clean and prepare pure web output directory 'dist'
+    if os.path.exists(dist_dir):
+        shutil.rmtree(dist_dir)
+    os.makedirs(dist_dir, exist_ok=True)
+    dist_data_dir = os.path.join(dist_dir, 'data')
+    os.makedirs(dist_data_dir, exist_ok=True)
+    
+    root_data_dir = os.path.join(base_dir, 'data')
+    os.makedirs(root_data_dir, exist_ok=True)
+    
+    # 2. Convert CSV to JSON (JSON will be served to the web, CSV/Python files will NOT be in dist)
     csv_report = os.path.join(base_dir, '청렴신고_사건데이터.csv')
     json_report = os.path.join(base_dir, '청렴신고_사건데이터.json')
-    json_report_data = os.path.join(data_dir, '청렴신고_사건데이터.json')
+    convert_csv_to_json(csv_report, json_report)
+    
+    # Copy JSONs to dist (both root of dist and dist/data for robust fetching)
+    shutil.copy2(json_report, os.path.join(dist_dir, '청렴신고_사건데이터.json'))
+    shutil.copy2(json_report, os.path.join(dist_data_dir, '청렴신고_사건데이터.json'))
+    shutil.copy2(json_report, os.path.join(root_data_dir, '청렴신고_사건데이터.json'))
     
     csv_edu = os.path.join(base_dir, '청렴교육_현황.csv')
     json_edu = os.path.join(base_dir, '청렴교육_현황.json')
-    json_edu_data = os.path.join(data_dir, '청렴교육_현황.json')
-    
-    convert_csv_to_json(csv_report, json_report)
-    shutil.copy2(json_report, json_report_data)
-    
     convert_csv_to_json(csv_edu, json_edu)
-    shutil.copy2(json_edu, json_edu_data)
+    
+    shutil.copy2(json_edu, os.path.join(dist_dir, '청렴교육_현황.json'))
+    shutil.copy2(json_edu, os.path.join(dist_data_dir, '청렴교육_현황.json'))
+    shutil.copy2(json_edu, os.path.join(root_data_dir, '청렴교육_현황.json'))
     
     # Load cases for static rendering
     with open(json_report, 'r', encoding='utf-8') as f:
@@ -236,20 +248,20 @@ def build():
     valid_amounts = [float(c['위반금액_만원']) for c in cases if c.get('위반금액_만원') and c['위반금액_만원'].isdigit()]
     avg_amount = round(sum(valid_amounts) / len(valid_amounts)) if valid_amounts else 0
     
-    # 2. Fetch RSS items (at least 5 items)
+    # 3. Fetch RSS items (at least 5 items)
     rss_items = fetch_rss_items()
     print(f"Build: Fetched {len(rss_items)} RSS items")
     
-    with open(os.path.join(data_dir, 'rss.json'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(dist_data_dir, 'rss.json'), 'w', encoding='utf-8') as f:
+        json.dump(rss_items, f, ensure_ascii=False, indent=2)
+    with open(os.path.join(root_data_dir, 'rss.json'), 'w', encoding='utf-8') as f:
         json.dump(rss_items, f, ensure_ascii=False, indent=2)
         
     rss_html = generate_static_rss_html(rss_items)
     cards_html = generate_static_case_cards(cases, limit=24)
     
-    # 3. Read template and inject static items
+    # 4. Read template and inject static items into both dist/index.html and root index.html
     template_path = os.path.join(base_dir, 'index.template.html')
-    target_path = os.path.join(base_dir, 'index.html')
-    
     with open(template_path, 'r', encoding='utf-8') as f:
         content = f.read()
         
@@ -273,9 +285,23 @@ def build():
     content = content.replace('id="statInvestigatingCount">-<', f'id="statInvestigatingCount">{investigating_cases:,}건<')
     content = content.replace('id="statAvgAmount">-<', f'id="statAvgAmount">{avg_amount:,}만원<')
     
-    with open(target_path, 'w', encoding='utf-8') as f:
+    # Save to dist/index.html and root index.html
+    with open(os.path.join(dist_dir, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(content)
-    print(f"Build: Successfully generated static {target_path} (Total cases: {total_cases})")
+    with open(os.path.join(base_dir, 'index.html'), 'w', encoding='utf-8') as f:
+        f.write(content)
+        
+    # 5. Copy client static assets (style.css, app.js) to dist
+    shutil.copy2(os.path.join(base_dir, 'style.css'), os.path.join(dist_dir, 'style.css'))
+    shutil.copy2(os.path.join(base_dir, 'app.js'), os.path.join(dist_dir, 'app.js'))
+    
+    # 6. Verify: Absolutely NO .py or .csv in dist!
+    dist_files = [os.path.join(dp, f) for dp, dn, filenames in os.walk(dist_dir) for f in filenames]
+    forbidden = [f for f in dist_files if f.endswith(('.py', '.csv'))]
+    if forbidden:
+        raise RuntimeError(f"Security Alert: Forbidden files found in web dist: {forbidden}")
+        
+    print(f"Build: Successfully generated clean web bundle in dist/ ({len(dist_files)} files). Zero .py or .csv files in web source!")
 
 if __name__ == '__main__':
     build()
