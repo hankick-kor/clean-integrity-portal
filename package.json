@@ -1,0 +1,13 @@
+{
+  "name": "clean-integrity-portal",
+  "version": "1.0.0",
+  "description": "시민을 위한 청렴 신고 신속 조회 시스템 정적 웹페이지",
+  "scripts": {
+    "build": "python scripts/build.py",
+    "start": "npx serve .",
+    "deploy": "npx netlify deploy --prod --dir=."
+  },
+  "keywords": ["integrity", "public-service", "clean-portal", "korea-kr-rss"],
+  "author": "",
+  "license": "MIT"
+}

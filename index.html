@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>시민 청렴 신고 조회 시스템</title>
+  <meta name="description" content="시민이 공공 분야의 청렴 신고 사건 내역을 투명하고 신속하게 조회할 수 있는 대민 포털 서비스입니다.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚖️</text></svg>">
+</head>
+<body>
+  <!-- Header & Navigation -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner container">
+      <div class="logo-area">
+        <div class="logo-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5"></path>
+            <path d="M2 12l10 5 10-5"></path>
+          </svg>
+        </div>
+        <div>
+          <h1 class="site-title">시민 청렴 신고 조회 시스템</h1>
+          <p class="site-subtitle">Clean Governance & Public Integrity Portal</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="themeToggleBtn" class="btn-icon" aria-label="화면 모드 전환" title="다크/라이트 모드 전환">
+          <span class="theme-icon">🌙</span>
+        </button>
+        <button id="eduModalBtn" class="btn btn-outline" title="공공기관 청렴교육 현황 보기">
+          <span class="btn-icon-svg">🎓</span> 기관 청렴교육 현황
+        </button>
+        <a href="#rssSection" class="btn btn-primary" title="최신 정책 뉴스 바로가기">
+          <span>📰 정책 뉴스</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section & Real-time Stats -->
+  <section class="hero-section" id="heroSection">
+    <div class="container">
+      <div class="hero-content">
+        <span class="hero-badge">대민 투명 행정 서비스</span>
+        <h2 class="hero-title">공정하고 투명한 사회를 위한 청렴 신고 신속 조회</h2>
+        <p class="hero-desc">
+          시민이 참여하고 신뢰하는 청렴 공공사회를 구현합니다. 등록된 청렴 신고 사건의 처리 진행 상태와 유형별 통계를 실시간으로 조회하세요.
+        </p>
+      </div>
+
+      <!-- Quick Stats Dashboard -->
+      <div class="stats-grid" id="statsGrid">
+        <div class="stat-card">
+          <div class="stat-icon-wrap bg-blue">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          </div>
+          <div class="stat-info">
+            <span class="stat-label">총 신고 접수</span>
+            <span class="stat-value" id="statTotalCount">-</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon-wrap bg-green">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          </div>
+          <div class="stat-info">
+            <span class="stat-label">처리 완료</span>
+            <div class="stat-row">
+              <span class="stat-value" id="statCompletedCount">-</span>
+              <span class="stat-sub" id="statCompletedRate">(0%)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon-wrap bg-amber">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          </div>
+          <div class="stat-info">
+            <span class="stat-label">조사 및 진행중</span>
+            <span class="stat-value" id="statInvestigatingCount">-</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon-wrap bg-purple">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          </div>
+          <div class="stat-info">
+            <span class="stat-label">평균 위반 적발액</span>
+            <span class="stat-value" id="statAvgAmount">-</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Container -->
+  <main class="container main-content" id="mainContent">
+    
+    <!-- Search & Filter Controls -->
+    <section class="filter-panel" id="filterPanel">
+      <div class="filter-panel-header">
+        <h3 class="panel-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          사건 필터링 및 검색
+        </h3>
+        <button id="resetFiltersBtn" class="btn-link" title="필터 초기화">
+          🔄 필터 초기화
+        </button>
+      </div>
+
+      <div class="filter-grid">
+        <!-- Keyword Search -->
+        <div class="filter-item search-box-wrap">
+          <label for="searchInput" class="filter-label">통합 검색어</label>
+          <div class="input-with-icon">
+            <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="searchInput" class="form-control" placeholder="사건ID, 위반금액, 비고 검색..." autocomplete="off">
+            <button id="clearSearchBtn" class="clear-btn" style="display:none;" title="검색어 지우기">&times;</button>
+          </div>
+        </div>
+
+        <!-- Filter: 신고유형 -->
+        <div class="filter-item">
+          <label for="typeFilter" class="filter-label">신고유형 필터</label>
+          <select id="typeFilter" class="form-select">
+            <option value="ALL">전체 신고유형</option>
+            <option value="금품수수">금품수수</option>
+            <option value="직권남용">직권남용</option>
+            <option value="공금유용">공금유용</option>
+            <option value="이해충돌">이해충돌</option>
+            <option value="예산횡령">예산횡령</option>
+          </select>
+        </div>
+
+        <!-- Filter: 처리상태 -->
+        <div class="filter-item">
+          <label for="statusFilter" class="filter-label">처리상태 필터</label>
+          <select id="statusFilter" class="form-select">
+            <option value="ALL">전체 처리상태</option>
+            <option value="접수완료">접수완료</option>
+            <option value="조사중">조사중</option>
+            <option value="처리완료">처리완료</option>
+            <option value="이첩">이첩</option>
+            <option value="기각">기각</option>
+          </select>
+        </div>
+
+        <!-- Filter: 지역 -->
+        <div class="filter-item">
+          <label for="regionFilter" class="filter-label">지역 필터</label>
+          <select id="regionFilter" class="form-select">
+            <option value="ALL">전국 전체</option>
+            <!-- Dynamically populated -->
+          </select>
+        </div>
+      </div>
+
+      <!-- Quick Tag Chips for Instant Filtering -->
+      <div class="quick-chips-row">
+        <span class="chips-label">빠른 상태 선택:</span>
+        <div class="chips-container" id="quickStatusChips">
+          <button class="chip active" data-status="ALL">전체</button>
+          <button class="chip" data-status="조사중">조사중</button>
+          <button class="chip" data-status="처리완료">처리완료</button>
+          <button class="chip" data-status="접수완료">접수완료</button>
+          <button class="chip" data-status="이첩">이첩</button>
+          <button class="chip" data-status="기각">기각</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results Header with exact '결과 N건' format -->
+    <section class="results-header" id="resultsHeader">
+      <div class="results-meta">
+        <!-- IMAGE REQUIREMENT: 화면에 "결과 N건" 표시 -->
+        <div class="result-count-badge-wrap">
+          <span id="resultCount" class="result-count-badge">결과 0건</span>
+        </div>
+        <span class="results-subtext" id="resultsSubtext">전체 사건 목록을 표시하고 있습니다.</span>
+      </div>
+
+      <div class="results-toolbar">
+        <label for="sortSelect" class="sr-only">정렬 방식</label>
+        <select id="sortSelect" class="form-select form-select-sm">
+          <option value="date-desc">신고일자 최신순</option>
+          <option value="date-asc">신고일자 과거순</option>
+          <option value="amount-desc">위반금액 높은순</option>
+          <option value="amount-asc">위반금액 낮은순</option>
+        </select>
+        
+        <div class="view-mode-toggle">
+          <button id="viewGridBtn" class="btn-icon-sm active" title="카드 그리드 뷰">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          </button>
+          <button id="viewTableBtn" class="btn-icon-sm" title="테이블 뷰">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Cards Container (IMAGE REQUIREMENT: 신고일자·신고유형·지역·처리상태를 카드 형태로 표시) -->
+    <section class="cases-container" id="casesContainer">
+      <div id="cardsGrid" class="cards-grid">
+        <!-- Dynamically rendered cards -->
+      </div>
+      <div id="tableView" class="table-responsive" style="display: none;">
+        <table class="cases-table">
+          <thead>
+            <tr>
+              <th>사건ID</th>
+              <th>신고일자</th>
+              <th>신고유형</th>
+              <th>지역</th>
+              <th>처리상태</th>
+              <th>위반금액</th>
+              <th>조치결과</th>
+              <th>상세</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Dynamically rendered table rows -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Empty State -->
+      <div id="noResultsState" class="empty-state" style="display: none;">
+        <div class="empty-icon">🔍</div>
+        <h3>조건에 일치하는 신고 사건이 없습니다.</h3>
+        <p>선택하신 검색어나 필터 조건을 완화한 후 다시 시도해 보세요.</p>
+        <button id="emptyResetBtn" class="btn btn-outline">전체 필터 초기화</button>
+      </div>
+
+      <!-- Pagination Controls -->
+      <div class="pagination-wrapper" id="paginationWrapper">
+        <div class="pagination-info">
+          <span id="pageInfoText">1 / 1 페이지</span>
+        </div>
+        <div class="pagination-nav" id="paginationNav">
+          <!-- Dynamically generated pagination buttons -->
+        </div>
+        <div class="page-size-selector">
+          <label for="pageSizeSelect">페이지 당:</label>
+          <select id="pageSizeSelect" class="form-select form-select-xs">
+            <option value="12">12건</option>
+            <option value="24" selected>24건</option>
+            <option value="48">48건</option>
+            <option value="9999">전체 보기</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- External Resource: korea.kr RSS Feed (IMAGE REQUIREMENT: korea.kr RSS를 출처 링크로 제공하고 최신 5건 이상을 빌드 시점에 정적 목록으로 표시) -->
+    <section class="rss-section" id="rssSection">
+      <div class="rss-section-header">
+        <div class="rss-title-group">
+          <span class="section-tag">정부 공공 정책 알림</span>
+          <h3 class="section-title">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg>
+            공공 청렴 & 정책 최신 소식 (RSS)
+          </h3>
+          <p class="section-desc">대한민국 정책브리핑 및 정부 부처의 최신 정책 보도자료를 정적으로 제공합니다.</p>
+        </div>
+
+        <!-- IMAGE REQUIREMENT: korea.kr RSS를 출처 링크로 제공 (예: https://www.korea.kr/rss/dept_mois.xml) -->
+        <div class="rss-source-box">
+          <span class="source-label">📌 공식 RSS 출처 링크:</span>
+          <a href="https://www.korea.kr/rss/dept_mois.xml" target="_blank" rel="noopener noreferrer" class="rss-source-link" title="korea.kr 행정안전부 RSS 원본 새창 열기">
+            https://www.korea.kr/rss/dept_mois.xml
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Static List of At Least 5 Items generated at build time -->
+      <div class="rss-cards-grid" id="rssCardsGrid">
+<!-- RSS_STATIC_ITEMS_START -->
+<article class="rss-card" data-source="korea.kr 연계 행정안전부 RSS">
+          <div class="rss-card-badge">
+            <span class="source-tag">korea.kr 연계 행정안전부 RSS</span>
+            <span class="date-tag">SUN, 25 OCT 2026 12:00:00 KST</span>
+          </div>
+          <h4 class="rss-title">
+            <a href="https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&amp;nttId=130455" target="_blank" rel="noopener noreferrer" title="원문 새창 열기">
+              아프리카와 3년의 동행 시작,  한국형 재난관리 경험을 나누다
+              <svg class="external-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+          </h4>
+          <p class="rss-desc">- 아프리카 5개국 재난관리 공무원 대상 1차년도 초청연수 운영(10.25.~11.5.) - 한국의 재난관리 정책·기후재난 대응 경험 공유로 협력 기반 마련 행정안전부 국가재난안전교육원 ( 원장 문영훈 ) 은 10 월 25 일 ( 일 ) 부터 11 월...</p>
+          <div class="rss-card-footer">
+            <a href="https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&amp;nttId=130455" target="_blank" rel="noopener noreferrer" class="read-more-btn">
+              원문 보도자료 보기 &rarr;
+            </a>
+          </div>
+        </article>
+<article class="rss-card" data-source="korea.kr 연계 행정안전부 RSS">
+          <div class="rss-card-badge">
+            <span class="source-tag">korea.kr 연계 행정안전부 RSS</span>
+            <span class="date-tag">SAT, 24 OCT 2026 18:00:00 KST</span>
+          </div>
+          <h4 class="rss-title">
+            <a href="https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&amp;nttId=130483" target="_blank" rel="noopener noreferrer" title="원문 새창 열기">
+              태풍 ‘참피’ 북상에 따라 제주‧남해안  풍수해 위기경보 ‘주의’로 상향
+              <svg class="external-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+          </h4>
+          <p class="rss-desc">- 행안부, 24일 18시부로 위기경보 수준 상향 … 선제적 대응체계 가동 - 5개 시‧도 현장상황관리관 긴급 파견 및 취약 시설물 집중 점검 행정안전부(장관 윤호중)는 제30호 태풍 ‘참피’의 영향으로 제주도 및 남해안 지역(전남광주, 부산, 울산,...</p>
+          <div class="rss-card-footer">
+            <a href="https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&amp;nttId=130483" target="_blank" rel="noopener noreferrer" class="read-more-btn">
+              원문 보도자료 보기 &rarr;
+            </a>
+          </div>
+        </article>
+<article class="rss-card" data-source="korea.kr 연계 행정안전부 RSS">
+          <div class="rss-card-badge">
+            <span class="source-tag">korea.kr 연계 행정안전부 RSS</span>
+            <span class="date-tag">FRI, 23 OCT 2026 11:00:00 KST</span>
+          </div>
+          <h4 class="rss-title">
+            <a href="https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&amp;nttId=130452" target="_blank" rel="noopener noreferrer" title="원문 새창 열기">
+              조세이 탄광 유해 DNA 감정 결과
+              <svg class="external-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+          </h4>
+          <p class="rss-desc">우리 정부는 일본 야마구치현 우베시 조세이 ( 長生 ) 탄광에서 지난 2025 년 8 월과 2026 년 2 월 발굴된 유해 5 점에 대한 신원확인을 위해 한일 양국 간 협력을 통해 DNA 감정을 진행해 왔다 . 한일 양국 정부의 DNA 분석 결과 , ...</p>
+          <div class="rss-card-footer">
+            <a href="https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&amp;nttId=130452" target="_blank" rel="noopener noreferrer" class="read-more-btn">
+              원문 보도자료 보기 &rarr;
+            </a>
+          </div>
+        </article>
+<article class="rss-card" data-source="korea.kr 연계 행정안전부 RSS">
+          <div class="rss-card-badge">
+            <span class="source-tag">korea.kr 연계 행정안전부 RSS</span>
+            <span class="date-tag">FRI, 23 OCT 2026 10:00:00 KST</span>
+          </div>
+          <h4 class="rss-title">
+            <a href="https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&amp;nttId=130444" target="_blank" rel="noopener noreferrer" title="원문 새창 열기">
+              제30호 태풍 ‘참피’, 호우·강풍 피해 대비 관계기관 대책회의 개최
+              <svg class="external-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+          </h4>
+          <p class="rss-desc">행정안전부(장관 윤호중)는 10월 23일(금) 10시, 중앙재난안전상황실에서 김용균 자연재난실장 주재로 제30호 태풍 ‘참피’ 및 호우(10.23~26일)에 대비하기 위한 관계기관 대책회의를 개최했다. 이번 회의에서는 관계 중앙부처, 지방정부 및 공공...</p>
+          <div class="rss-card-footer">
+            <a href="https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&amp;nttId=130444" target="_blank" rel="noopener noreferrer" class="read-more-btn">
+              원문 보도자료 보기 &rarr;
+            </a>
+          </div>
+        </article>
+<article class="rss-card" data-source="korea.kr 연계 행정안전부 RSS">
+          <div class="rss-card-badge">
+            <span class="source-tag">korea.kr 연계 행정안전부 RSS</span>
+            <span class="date-tag">FRI, 23 OCT 2026 10:00:00 KST</span>
+          </div>
+          <h4 class="rss-title">
+            <a href="https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&amp;nttId=130426" target="_blank" rel="noopener noreferrer" title="원문 새창 열기">
+              한국 재난안전통신망 운영 경험, 해외와 공유한다
+              <svg class="external-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+          </h4>
+          <p class="rss-desc">- 10월 23일 스웨덴·핀란드 등 해외 관계자 대상 서울운영센터 현장 견학 - 전국 단일망 운영체계와 활용사례 등 한국의 선도적 구축‧운영 경험 공유 행정안전부 ( 장관 윤호중 ) 는 10 월 23 일 ( 금 ) ‘ 공공안전통신 포럼 국제 컨퍼런스 ...</p>
+          <div class="rss-card-footer">
+            <a href="https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&amp;nttId=130426" target="_blank" rel="noopener noreferrer" class="read-more-btn">
+              원문 보도자료 보기 &rarr;
+            </a>
+          </div>
+        </article>
+<article class="rss-card" data-source="korea.kr 연계 행정안전부 RSS">
+          <div class="rss-card-badge">
+            <span class="source-tag">korea.kr 연계 행정안전부 RSS</span>
+            <span class="date-tag">THU, 22 OCT 2026 16:00:00 KST</span>
+          </div>
+          <h4 class="rss-title">
+            <a href="https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&amp;nttId=130397" target="_blank" rel="noopener noreferrer" title="원문 새창 열기">
+              지방세 환급금, 이제 평소 쓰던 민간 앱에서 간편하게 확인하고 신청까지 한 번에!
+              <svg class="external-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+          </h4>
+          <p class="rss-desc">- 민간 앱 활용, ｢지방세 환급금 조회･환급 서비스｣ 업무협약(10.22.) - 국민이 익숙한 민간 앱에서 지방세 환급금 조회 및 지급 청구 가능(’26.12월~) - 공공의 행정정보와 민간의 디지털･금융 서비스 연계로 국민 편의 제고 행정안전부 (...</p>
+          <div class="rss-card-footer">
+            <a href="https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&amp;nttId=130397" target="_blank" rel="noopener noreferrer" class="read-more-btn">
+              원문 보도자료 보기 &rarr;
+            </a>
+          </div>
+        </article>
+<!-- RSS_STATIC_ITEMS_END -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal: Case Detail -->
+  <div id="caseModal" class="modal-backdrop" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="modalCaseId">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="modal-badge" id="modalStatusBadge">처리상태</span>
+          <h3 id="modalCaseId">사건 상세 정보</h3>
+        </div>
+        <button id="modalCloseBtn" class="modal-close-btn" aria-label="닫기">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Case Details Rendered Here -->
+      </div>
+      <div class="modal-footer">
+        <button id="modalConfirmBtn" class="btn btn-primary">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Integrity Education Summary -->
+  <div id="eduModal" class="modal-backdrop" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="eduModalTitle">
+    <div class="modal-dialog modal-dialog-lg">
+      <div class="modal-header">
+        <h3 id="eduModalTitle">🎓 전국 기관별 청렴교육 이수 현황</h3>
+        <button id="eduModalCloseBtn" class="modal-close-btn" aria-label="닫기">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="edu-desc">공공기관 및 자치단체의 청렴문화 확산을 위한 연간 교육 현황 통계입니다. (총 120개 기관)</p>
+        <div class="edu-stats-bar" id="eduStatsBar">
+          <!-- Summary stats of edu -->
+        </div>
+        <div class="table-responsive">
+          <table class="cases-table" id="eduTable">
+            <thead>
+              <tr>
+                <th>기관코드</th>
+                <th>기관명</th>
+                <th>기관유형</th>
+                <th>교육이수율</th>
+                <th>연간교육(h)</th>
+                <th>참여자수</th>
+                <th>청렴우수기관</th>
+              </tr>
+            </thead>
+            <tbody id="eduTableBody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="eduModalConfirmBtn" class="btn btn-primary">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <h4>시민 청렴 신고 빠른 조회 시스템</h4>
+        <p>본 포털은 시민의 알 권리와 공공기관의 청렴 투명성을 위해 관련 공공 데이터를 정적으로 제공합니다.</p>
+        <p class="footer-copy">&copy; 2026 청렴 행정 데이터 포털. All rights reserved.</p>
+      </div>
+      <div class="footer-right">
+        <div class="footer-links">
+          <a href="https://www.korea.kr/rss/dept_mois.xml" target="_blank" rel="noopener noreferrer">korea.kr RSS 피드</a>
+          <a href="청렴신고_사건데이터.json" target="_blank" download>신고데이터 JSON 다운로드</a>
+          <a href="청렴교육_현황.json" target="_blank" download>청렴교육 JSON 다운로드</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
