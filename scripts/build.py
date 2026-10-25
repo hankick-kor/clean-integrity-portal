@@ -7,7 +7,6 @@ import html
 import datetime
 from convert_data import convert_csv_to_json
 
-# 1. Fallback news list in case network fails
 FALLBACK_NEWS = [
     {
         "title": "공직사회 반부패·청렴 실천 결의 및 국민 신뢰 제고 방안 추진",
@@ -52,6 +51,15 @@ FALLBACK_NEWS = [
         "description": "채용 및 계약 과정의 불공정 관행 근절을 위한 감사위원회 합동 불시 점검 강화"
     }
 ]
+
+TYPE_ICONS = {
+    '금품수수': '💰',
+    '직권남용': '⚖️',
+    '공금유용': '💳',
+    '이해충돌': '🤝',
+    '예산횡령': '🚨',
+    '기타': '📋'
+}
 
 def fetch_rss_items():
     urls = [
@@ -100,11 +108,9 @@ def clean_description(raw_desc):
     if not raw_desc:
         return ""
     import re
-    # Remove script/style
     clean = re.sub(r'<[^>]+>', ' ', raw_desc)
     clean = re.sub(r'&[a-zA-Z0-9#]+;', ' ', clean)
     clean = re.sub(r'\s+', ' ', clean).strip()
-    # Filter out hwp json remnants if any
     if 'documentPr' in clean or 'hwpjson' in clean:
         clean = clean.split('documentPr')[0].split('hwpjson')[0].strip()
     return clean[:140] + ('...' if len(clean) > 140 else '')
@@ -142,6 +148,62 @@ def generate_static_rss_html(items):
         html_parts.append(card_html)
     return "\n".join(html_parts)
 
+def generate_static_case_cards(cases, limit=24):
+    html_parts = []
+    for item in cases[:limit]:
+        case_id = html.escape(item.get('사건ID', '-'))
+        date = html.escape(item.get('신고일자', '-'))
+        report_type = html.escape(item.get('신고유형', '일반'))
+        region = html.escape(item.get('지역', '-'))
+        status = html.escape(item.get('처리상태', '접수'))
+        raw_amount = item.get('위반금액_만원', '')
+        amount = f"{int(raw_amount):,}만원" if (raw_amount and raw_amount.isdigit()) else '-'
+        action = html.escape(item.get('조치결과', '-'))
+        icon = TYPE_ICONS.get(report_type, '📑')
+        
+        card = f'''
+        <article class="case-card" onclick="openCaseModal('{case_id}')" title="{case_id} 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">{case_id}</span>
+            <span class="status-badge status-{status}">{status}</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">{icon}</span>
+            <span class="type-text">{report_type}</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 {region}</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">{date}</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">{amount}</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">{action}</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+        '''.strip()
+        html_parts.append(card)
+    return "\n".join(html_parts)
+
 def build():
     base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
     data_dir = os.path.join(base_dir, 'data')
@@ -162,37 +224,58 @@ def build():
     convert_csv_to_json(csv_edu, json_edu)
     shutil.copy2(json_edu, json_edu_data)
     
+    # Load cases for static rendering
+    with open(json_report, 'r', encoding='utf-8') as f:
+        cases = json.load(f)
+    
+    total_cases = len(cases)
+    completed_cases = len([c for c in cases if c.get('처리상태') == '처리완료'])
+    completed_rate = round((completed_cases / total_cases) * 100) if total_cases else 0
+    investigating_cases = len([c for c in cases if c.get('처리상태') in ('조사중', '이첩')])
+    
+    valid_amounts = [float(c['위반금액_만원']) for c in cases if c.get('위반금액_만원') and c['위반금액_만원'].isdigit()]
+    avg_amount = round(sum(valid_amounts) / len(valid_amounts)) if valid_amounts else 0
+    
     # 2. Fetch RSS items (at least 5 items)
     rss_items = fetch_rss_items()
     print(f"Build: Fetched {len(rss_items)} RSS items")
     
-    # Save RSS items to data/rss.json as well
     with open(os.path.join(data_dir, 'rss.json'), 'w', encoding='utf-8') as f:
         json.dump(rss_items, f, ensure_ascii=False, indent=2)
         
     rss_html = generate_static_rss_html(rss_items)
+    cards_html = generate_static_case_cards(cases, limit=24)
     
-    # 3. Read template or index.html and inject static RSS items
+    # 3. Read template and inject static items
     template_path = os.path.join(base_dir, 'index.template.html')
     target_path = os.path.join(base_dir, 'index.html')
     
-    source_path = template_path if os.path.exists(template_path) else target_path
-    if os.path.exists(source_path):
-        with open(source_path, 'r', encoding='utf-8') as f:
-            content = f.read()
-            
-        start_marker = '<!-- RSS_STATIC_ITEMS_START -->'
-        end_marker = '<!-- RSS_STATIC_ITEMS_END -->'
+    with open(template_path, 'r', encoding='utf-8') as f:
+        content = f.read()
         
-        if start_marker in content and end_marker in content:
-            pre = content.split(start_marker)[0]
-            post = content.split(end_marker)[1]
-            new_content = f"{pre}{start_marker}\n{rss_html}\n{end_marker}{post}"
-            with open(target_path, 'w', encoding='utf-8') as f:
-                f.write(new_content)
-            print(f"Build: Successfully injected static RSS items into {target_path}")
-        else:
-            print("Build: RSS markers not found in template. Will inject once template is created.")
+    # Inject RSS
+    if '<!-- RSS_STATIC_ITEMS_START -->' in content:
+        pre = content.split('<!-- RSS_STATIC_ITEMS_START -->')[0]
+        post = content.split('<!-- RSS_STATIC_ITEMS_END -->')[1]
+        content = f"{pre}<!-- RSS_STATIC_ITEMS_START -->\n{rss_html}\n<!-- RSS_STATIC_ITEMS_END -->{post}"
+        
+    # Inject initial cards
+    if '<!-- CARDS_STATIC_ITEMS_START -->' in content:
+        pre = content.split('<!-- CARDS_STATIC_ITEMS_START -->')[0]
+        post = content.split('<!-- CARDS_STATIC_ITEMS_END -->')[1]
+        content = f"{pre}<!-- CARDS_STATIC_ITEMS_START -->\n{cards_html}\n<!-- CARDS_STATIC_ITEMS_END -->{post}"
+        
+    # Inject static stats and count
+    content = content.replace('id="resultCount" class="result-count-badge">결과 0건<', f'id="resultCount" class="result-count-badge">결과 {total_cases:,}건<')
+    content = content.replace('id="statTotalCount">-<', f'id="statTotalCount">{total_cases:,}건<')
+    content = content.replace('id="statCompletedCount">-<', f'id="statCompletedCount">{completed_cases:,}건<')
+    content = content.replace('id="statCompletedRate">(0%)<', f'id="statCompletedRate">({completed_rate}%)<')
+    content = content.replace('id="statInvestigatingCount">-<', f'id="statInvestigatingCount">{investigating_cases:,}건<')
+    content = content.replace('id="statAvgAmount">-<', f'id="statAvgAmount">{avg_amount:,}만원<')
+    
+    with open(target_path, 'w', encoding='utf-8') as f:
+        f.write(content)
+    print(f"Build: Successfully generated static {target_path} (Total cases: {total_cases})")
 
 if __name__ == '__main__':
     build()

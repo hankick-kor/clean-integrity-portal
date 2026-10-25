@@ -61,7 +61,7 @@
           </div>
           <div class="stat-info">
             <span class="stat-label">총 신고 접수</span>
-            <span class="stat-value" id="statTotalCount">-</span>
+            <span class="stat-value" id="statTotalCount">500건</span>
           </div>
         </div>
 
@@ -72,8 +72,8 @@
           <div class="stat-info">
             <span class="stat-label">처리 완료</span>
             <div class="stat-row">
-              <span class="stat-value" id="statCompletedCount">-</span>
-              <span class="stat-sub" id="statCompletedRate">(0%)</span>
+              <span class="stat-value" id="statCompletedCount">229건</span>
+              <span class="stat-sub" id="statCompletedRate">(46%)</span>
             </div>
           </div>
         </div>
@@ -84,7 +84,7 @@
           </div>
           <div class="stat-info">
             <span class="stat-label">조사 및 진행중</span>
-            <span class="stat-value" id="statInvestigatingCount">-</span>
+            <span class="stat-value" id="statInvestigatingCount">170건</span>
           </div>
         </div>
 
@@ -94,7 +94,7 @@
           </div>
           <div class="stat-info">
             <span class="stat-label">평균 위반 적발액</span>
-            <span class="stat-value" id="statAvgAmount">-</span>
+            <span class="stat-value" id="statAvgAmount">1,973만원</span>
           </div>
         </div>
       </div>
@@ -182,7 +182,7 @@
       <div class="results-meta">
         <!-- IMAGE REQUIREMENT: 화면에 "결과 N건" 표시 -->
         <div class="result-count-badge-wrap">
-          <span id="resultCount" class="result-count-badge">결과 0건</span>
+          <span id="resultCount" class="result-count-badge">결과 500건</span>
         </div>
         <span class="results-subtext" id="resultsSubtext">전체 사건 목록을 표시하고 있습니다.</span>
       </div>
@@ -210,7 +210,920 @@
     <!-- Case Cards Container (IMAGE REQUIREMENT: 신고일자·신고유형·지역·처리상태를 카드 형태로 표시) -->
     <section class="cases-container" id="casesContainer">
       <div id="cardsGrid" class="cards-grid">
-        <!-- Dynamically rendered cards -->
+<!-- CARDS_STATIC_ITEMS_START -->
+<article class="case-card" onclick="openCaseModal('CASE0001')" title="CASE0001 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0001</span>
+            <span class="status-badge status-조사중">조사중</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">💰</span>
+            <span class="type-text">금품수수</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 경남</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2025-06-08</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">11만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">해당없음</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<article class="case-card" onclick="openCaseModal('CASE0002')" title="CASE0002 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0002</span>
+            <span class="status-badge status-조사중">조사중</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">⚖️</span>
+            <span class="type-text">직권남용</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 대구</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2025-07-22</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">641만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">해당없음</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<article class="case-card" onclick="openCaseModal('CASE0003')" title="CASE0003 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0003</span>
+            <span class="status-badge status-조사중">조사중</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">💳</span>
+            <span class="type-text">공금유용</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 전북</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2024-06-25</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">1,398만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">해당없음</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<article class="case-card" onclick="openCaseModal('CASE0004')" title="CASE0004 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0004</span>
+            <span class="status-badge status-이첩">이첩</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">💰</span>
+            <span class="type-text">금품수수</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 제주</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2025-03-19</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">756만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">검찰이첩</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<article class="case-card" onclick="openCaseModal('CASE0005')" title="CASE0005 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0005</span>
+            <span class="status-badge status-기각">기각</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">🤝</span>
+            <span class="type-text">이해충돌</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 인천</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2025-10-16</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">1,167만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">불문</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<article class="case-card" onclick="openCaseModal('CASE0006')" title="CASE0006 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0006</span>
+            <span class="status-badge status-기각">기각</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">⚖️</span>
+            <span class="type-text">직권남용</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 인천</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2024-05-03</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">2,139만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">불문</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<article class="case-card" onclick="openCaseModal('CASE0007')" title="CASE0007 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0007</span>
+            <span class="status-badge status-조사중">조사중</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">🤝</span>
+            <span class="type-text">이해충돌</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 강원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2025-06-02</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">1,682만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">해당없음</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<article class="case-card" onclick="openCaseModal('CASE0008')" title="CASE0008 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0008</span>
+            <span class="status-badge status-기각">기각</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">💳</span>
+            <span class="type-text">공금유용</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 서울</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2025-04-30</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">509만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">불문</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<article class="case-card" onclick="openCaseModal('CASE0009')" title="CASE0009 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0009</span>
+            <span class="status-badge status-처리완료">처리완료</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">⚖️</span>
+            <span class="type-text">직권남용</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 충남</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2025-04-08</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">133만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">징계·경고</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<article class="case-card" onclick="openCaseModal('CASE0010')" title="CASE0010 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0010</span>
+            <span class="status-badge status-처리완료">처리완료</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">💳</span>
+            <span class="type-text">공금유용</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 경기</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2025-05-25</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">2,516만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">징계·경고</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<article class="case-card" onclick="openCaseModal('CASE0011')" title="CASE0011 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0011</span>
+            <span class="status-badge status-처리완료">처리완료</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">🚨</span>
+            <span class="type-text">예산횡령</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 전남</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2025-09-04</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">25,628만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">징계·경고</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<article class="case-card" onclick="openCaseModal('CASE0012')" title="CASE0012 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0012</span>
+            <span class="status-badge status-접수완료">접수완료</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">💰</span>
+            <span class="type-text">금품수수</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 세종</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2024-01-09</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">2,575만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">해당없음</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<article class="case-card" onclick="openCaseModal('CASE0013')" title="CASE0013 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0013</span>
+            <span class="status-badge status-조사중">조사중</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">⚖️</span>
+            <span class="type-text">직권남용</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 경남</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2024-01-22</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">1,994만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">해당없음</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<article class="case-card" onclick="openCaseModal('CASE0014')" title="CASE0014 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0014</span>
+            <span class="status-badge status-접수완료">접수완료</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">⚖️</span>
+            <span class="type-text">직권남용</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 대전</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2024-06-04</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">2,615만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">해당없음</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<article class="case-card" onclick="openCaseModal('CASE0015')" title="CASE0015 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0015</span>
+            <span class="status-badge status-처리완료">처리완료</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">🤝</span>
+            <span class="type-text">이해충돌</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 인천</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2025-09-15</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">45만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">징계·경고</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<article class="case-card" onclick="openCaseModal('CASE0016')" title="CASE0016 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0016</span>
+            <span class="status-badge status-이첩">이첩</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">💰</span>
+            <span class="type-text">금품수수</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 경북</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2025-11-01</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">2,539만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">검찰이첩</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<article class="case-card" onclick="openCaseModal('CASE0017')" title="CASE0017 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0017</span>
+            <span class="status-badge status-조사중">조사중</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">💰</span>
+            <span class="type-text">금품수수</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 제주</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2025-12-10</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">1,464만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">해당없음</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<article class="case-card" onclick="openCaseModal('CASE0018')" title="CASE0018 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0018</span>
+            <span class="status-badge status-처리완료">처리완료</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">🚨</span>
+            <span class="type-text">예산횡령</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 전남</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2024-02-13</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">2,193만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">징계·경고</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<article class="case-card" onclick="openCaseModal('CASE0019')" title="CASE0019 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0019</span>
+            <span class="status-badge status-처리완료">처리완료</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">🤝</span>
+            <span class="type-text">이해충돌</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 충북</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2025-02-08</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">218만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">징계·경고</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<article class="case-card" onclick="openCaseModal('CASE0020')" title="CASE0020 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0020</span>
+            <span class="status-badge status-처리완료">처리완료</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">💰</span>
+            <span class="type-text">금품수수</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 울산</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2026-02-23</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">827만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">징계·경고</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<article class="case-card" onclick="openCaseModal('CASE0021')" title="CASE0021 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0021</span>
+            <span class="status-badge status-처리완료">처리완료</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">💳</span>
+            <span class="type-text">공금유용</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 울산</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2025-07-14</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">1,847만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">징계·경고</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<article class="case-card" onclick="openCaseModal('CASE0022')" title="CASE0022 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0022</span>
+            <span class="status-badge status-처리완료">처리완료</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">💰</span>
+            <span class="type-text">금품수수</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 울산</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2026-05-27</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">1,466만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">징계·경고</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<article class="case-card" onclick="openCaseModal('CASE0023')" title="CASE0023 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0023</span>
+            <span class="status-badge status-이첩">이첩</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">💰</span>
+            <span class="type-text">금품수수</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 부산</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2024-03-14</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">1,218만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">검찰이첩</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<article class="case-card" onclick="openCaseModal('CASE0024')" title="CASE0024 상세 보기">
+          <div class="card-top-bar">
+            <span class="case-id-badge">CASE0024</span>
+            <span class="status-badge status-이첩">이첩</span>
+          </div>
+          <div class="card-main-title">
+            <span class="type-icon">💳</span>
+            <span class="type-text">공금유용</span>
+          </div>
+          <div class="card-info-rows">
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                지역
+              </span>
+              <span class="info-row-value region-highlight">📍 충북</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                신고일자
+              </span>
+              <span class="info-row-value">2024-10-01</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">위반금액</span>
+              <span class="info-row-value amount-highlight">2,417만원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">조치결과</span>
+              <span class="info-row-value">검찰이첩</span>
+            </div>
+          </div>
+          <div class="card-footer-action">
+            <span class="card-detail-hint">클릭하여 세부정보 확인</span>
+            <span class="card-view-btn">상세보기 &rarr;</span>
+          </div>
+        </article>
+<!-- CARDS_STATIC_ITEMS_END -->
       </div>
       <div id="tableView" class="table-responsive" style="display: none;">
         <table class="cases-table">
@@ -288,7 +1201,7 @@
 <article class="rss-card" data-source="korea.kr 연계 행정안전부 RSS">
           <div class="rss-card-badge">
             <span class="source-tag">korea.kr 연계 행정안전부 RSS</span>
-            <span class="date-tag">SUN, 25 OCT 2026 12:00:00 KST</span>
+            <span class="date-tag">일, 25 10월 2026 12:00:00 KST</span>
           </div>
           <h4 class="rss-title">
             <a href="https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&amp;nttId=130455" target="_blank" rel="noopener noreferrer" title="원문 새창 열기">
@@ -306,7 +1219,7 @@
 <article class="rss-card" data-source="korea.kr 연계 행정안전부 RSS">
           <div class="rss-card-badge">
             <span class="source-tag">korea.kr 연계 행정안전부 RSS</span>
-            <span class="date-tag">SAT, 24 OCT 2026 18:00:00 KST</span>
+            <span class="date-tag">토, 24 10월 2026 18:00:00 KST</span>
           </div>
           <h4 class="rss-title">
             <a href="https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&amp;nttId=130483" target="_blank" rel="noopener noreferrer" title="원문 새창 열기">
@@ -324,7 +1237,7 @@
 <article class="rss-card" data-source="korea.kr 연계 행정안전부 RSS">
           <div class="rss-card-badge">
             <span class="source-tag">korea.kr 연계 행정안전부 RSS</span>
-            <span class="date-tag">FRI, 23 OCT 2026 11:00:00 KST</span>
+            <span class="date-tag">금, 23 10월 2026 11:00:00 KST</span>
           </div>
           <h4 class="rss-title">
             <a href="https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&amp;nttId=130452" target="_blank" rel="noopener noreferrer" title="원문 새창 열기">
@@ -342,7 +1255,7 @@
 <article class="rss-card" data-source="korea.kr 연계 행정안전부 RSS">
           <div class="rss-card-badge">
             <span class="source-tag">korea.kr 연계 행정안전부 RSS</span>
-            <span class="date-tag">FRI, 23 OCT 2026 10:00:00 KST</span>
+            <span class="date-tag">금, 23 10월 2026 10:00:00 KST</span>
           </div>
           <h4 class="rss-title">
             <a href="https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&amp;nttId=130444" target="_blank" rel="noopener noreferrer" title="원문 새창 열기">
@@ -360,7 +1273,7 @@
 <article class="rss-card" data-source="korea.kr 연계 행정안전부 RSS">
           <div class="rss-card-badge">
             <span class="source-tag">korea.kr 연계 행정안전부 RSS</span>
-            <span class="date-tag">FRI, 23 OCT 2026 10:00:00 KST</span>
+            <span class="date-tag">금, 23 10월 2026 10:00:00 KST</span>
           </div>
           <h4 class="rss-title">
             <a href="https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&amp;nttId=130426" target="_blank" rel="noopener noreferrer" title="원문 새창 열기">
@@ -378,7 +1291,7 @@
 <article class="rss-card" data-source="korea.kr 연계 행정안전부 RSS">
           <div class="rss-card-badge">
             <span class="source-tag">korea.kr 연계 행정안전부 RSS</span>
-            <span class="date-tag">THU, 22 OCT 2026 16:00:00 KST</span>
+            <span class="date-tag">목, 22 10월 2026 16:00:00 KST</span>
           </div>
           <h4 class="rss-title">
             <a href="https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&amp;nttId=130397" target="_blank" rel="noopener noreferrer" title="원문 새창 열기">
